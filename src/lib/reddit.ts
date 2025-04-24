@@ -21,16 +21,25 @@ export async function fetchSubredditPosts(subreddit: string = "popular") {
 }
 
 export async function fetchPopularSubreddits() {
-  const res = await fetch(`https://www.reddit.com/subreddits/popular.json`);
-  if (!res.ok) throw new Error("Failed to fetch subreddits");
-  const data = await res.json();
+  try {
+    const res = await fetch(`https://www.reddit.com/subreddits/popular.json`);
+    if (!res.ok) throw new Error("Failed to fetch subreddits");
 
-  return data.data.children.map((child: RedditAPIResponse<SubredditInfo>) => ({
-    name: child.data.display_name,
-    url: child.data.url,
-    title: child.data.title,
-  }));
+    const data = await res.json();
+    return data.data.children
+      .slice(0, 10)
+      .map((child: RedditAPIResponse<SubredditInfo>) => ({
+        name: child.data.display_name,
+        url: child.data.url,
+        title: child.data.title,
+        icon_img: child.data.icon_img,
+      }));
+  } catch (error) {
+    console.error("❌ fetchPopularSubreddits failed:", error);
+    return []; // Return fallback data instead of throwing
+  }
 }
+
 
 export async function fetchPostComments(postId: string) {
   const res = await fetch(`https://www.reddit.com/comments/${postId}.json`);
