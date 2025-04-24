@@ -4,6 +4,10 @@ export interface RedditPost {
     author: string;
     subreddit: string;
     subreddit_name_prefixed: string;
+    ups: number;
+    num_comments: number;
+    created_utc: number;
+    score: number;
     preview?: {
         images: {
             source: {
