@@ -9,11 +9,7 @@ export async function fetchHomePosts() {
 
 export async function fetchSubredditPosts(subreddit: string = "popular") {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_REDDIT_API_URL}/r/${subreddit}.json`,{
-      headers: {
-        "User-Agent": "Mozilla/5.0 (RedditLiteBot/1.0; +https://redditlite.com)",
-      }
-    });
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/proxy/reddit?url=https://www.reddit.com/r/${subreddit}.json`);
     console.log("Response:", res); // 👈 Debug
     if (!res.ok) throw new Error("Failed to fetch posts");
     const data = await res.json();
