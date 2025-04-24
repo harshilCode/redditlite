@@ -8,16 +8,16 @@ export async function fetchHomePosts() {
 }
 
 export async function fetchSubredditPosts(subreddit: string = "popular") {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_REDDIT_API_URL}/r/${subreddit}.json`, {
-    headers: {
-      "User-Agent": "Mozilla/5.0 (RedditClone/1.0)",
-    },
-    next: { revalidate: 60 }, // cache for 60 sec
-  });
-  if (!res.ok) throw new Error("Failed to fetch posts");
-  const data = await res.json();
-  return data.data.children
-  .map((child: RedditAPIResponse<RedditPost>) => child.data);
+  try {
+    const res = await fetch(`${process.env.REDDIT_API_URL}/r/${subreddit}.json`);
+    if (!res.ok) throw new Error("Failed to fetch posts");
+    const data = await res.json();
+
+    return data.data.children.map((child: RedditAPIResponse<RedditPost>) => child.data);
+  } catch (error) {
+    console.error("fetchSubredditPosts failed:", error);
+    return []; // 👈 return fallback
+  }
 }
 
 export async function fetchPopularSubreddits() {
