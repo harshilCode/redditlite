@@ -35,7 +35,6 @@ export default function PostCard({ post }: { post: RedditPost }) {
                 </AspectRatio.Root>
             )}
             <div className="p-4">
-                {post.id}
                 <Link
                     href={`/post/${post.id}`}
                     className="block hover:underline"

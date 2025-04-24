@@ -11,7 +11,6 @@ export default async function SubredditPage({ params }: Props) {
   
   return (
     <div>
-      <h1>{subreddit}</h1>
       <div className="grid grid-cols-1 gap-4">
         {posts.map((post: RedditPost, index: number) => (
           <PostCard key={index} post={post} />
