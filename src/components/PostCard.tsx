@@ -60,7 +60,7 @@ export default function PostCard({ post }: { post: RedditPost }) {
 
             {/* Text Section */}
             <div className="p-4 flex-1 flex flex-col">
-                <Link href={`/post/${post.id}`} className="block hover:underline">
+                <Link href={`${process.env.NEXT_PUBLIC_BASE_URL}/post/${post.id}`} className="block hover:underline">
                     <h2 className="font-semibold text-lg text-zinc-800 dark:text-zinc-100">
                         {post.title}
                     </h2>

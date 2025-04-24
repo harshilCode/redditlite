@@ -23,7 +23,7 @@ export default function PostPage() {
 
   return (
     <div className="p-6 max-w-2xl mx-auto space-y-4">
-      <Link href={`/r/${post.subreddit}`}> r/{post.subreddit}</Link>
+      <Link href={`${process.env.NEXT_PUBLIC_BASE_URL}/r/${post.subreddit}`}> r/{post.subreddit}</Link>
       <h1 className="text-xl font-semibold">{post.title}</h1>
       <p className="text-sm text-zinc-600">Posted by u/{post.author}</p>
       <hr />

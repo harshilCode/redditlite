@@ -11,7 +11,7 @@ export default function Sidebar({ subreddits }: { subreddits: SubredditInfo[] })
     <aside className="bg-white dark:bg-zinc-900 border-r border-zinc-100 dark:border-zinc-700 sticky pt-4 top-0 h-screen overflow-y-none">
       <ul className="text-sm">
         <li className="dark:border-zinc-700">
-          <Link href="/r/popular" className={`block pl-8 p-3 transition-colors duration-200 tracking-wide font-inter rounded cursor-pointer ${pathname === "/"
+          <Link href={`${process.env.NEXT_PUBLIC_BASE_URL}/r/popular`} className={`block pl-8 p-3 transition-colors duration-200 tracking-wide font-inter rounded cursor-pointer ${pathname === "/"
               ? "bg-gray-50 dark:bg-zinc-800 text-orange-500"
               : "text-gray-600 dark:text-gray-200 hover:text-orange-500 hover:bg-gray-50 dark:hover:bg-zinc-800"
             }`}>
@@ -19,7 +19,7 @@ export default function Sidebar({ subreddits }: { subreddits: SubredditInfo[] })
           </Link>
         </li>
         <li className="border-b border-zinc-100 dark:border-zinc-700">
-          <Link href="/r/technology" className={`block pl-8 p-3 transition-colors duration-200 tracking-wide font-inter rounded cursor-pointer ${pathname === "/r/technology"
+          <Link href={`${process.env.NEXT_PUBLIC_BASE_URL}/r/technology`} className={`block pl-8 p-3 transition-colors duration-200 tracking-wide font-inter rounded cursor-pointer ${pathname === "/r/technology"
               ? "bg-gray-50 dark:bg-zinc-800 text-orange-500"
               : "text-gray-600 dark:text-gray-200 hover:text-orange-500 hover:bg-gray-50 dark:hover:bg-zinc-800"
             }`}>
@@ -40,7 +40,7 @@ export default function Sidebar({ subreddits }: { subreddits: SubredditInfo[] })
               <li key={sr.name}>
                 <Link
                   prefetch
-                  href={sr.url}
+                  href={`${process.env.NEXT_PUBLIC_BASE_URL}${sr.url}`}
                   className={`block pl-12 p-3 transition-colors duration-200 tracking-wide font-inter rounded cursor-pointer ${isActive
                       ? "bg-gray-50 dark:bg-zinc-800 text-orange-500"
                       : "text-gray-600 dark:text-gray-200 hover:text-orange-500 hover:bg-gray-50 dark:hover:bg-zinc-800"
