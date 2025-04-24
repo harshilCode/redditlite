@@ -1,9 +1,10 @@
 import { fetchSubredditPosts } from "@/lib/reddit";
 import PostCard from "@/components/PostCard";
 import { RedditPost } from "@/types/reddit";
+
 export default async function Home() {
   const posts = await fetchSubredditPosts();
-
+  
   return (
     <div className="space-y-8 w-full">
       <div className="grid grid-cols-1 min-h-screen">

@@ -34,11 +34,10 @@ export default function PostCard({ post }: { post: RedditPost }) {
                     />
                 </AspectRatio.Root>
             )}
-            <div className="p-4">
+            <div className="p-4" onMouseEnter={handlePrefetch}>
                 <Link
                     href={`/post/${post.id}`}
                     className="block hover:underline"
-                    onMouseEnter={handlePrefetch}
                 >
                     <h2 className="font-semibold text-lg">{post.title}</h2>
                 </Link>

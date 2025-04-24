@@ -34,4 +34,5 @@ export interface SubredditInfo {
     url: string;
     title: string;
     display_name?: string;
+    icon_img?: string;
 }

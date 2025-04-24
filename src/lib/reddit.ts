@@ -1,5 +1,12 @@
 import { RedditPost, RedditAPIResponse, SubredditInfo } from "@/types/reddit";
 
+export async function fetchHomePosts() {
+  const res = await fetch(`https://oauth.reddit.com/.json`);
+  if (!res.ok) throw new Error("Failed to fetch posts");
+  const data = await res.json();
+  return data.data.children.map((child: RedditAPIResponse<RedditPost>) => child.data);
+}
+
 export async function fetchSubredditPosts(subreddit: string = "popular") {
   const res = await fetch(`${process.env.REDDIT_API_URL}/r/${subreddit}.json`, {
     headers: {
@@ -9,7 +16,8 @@ export async function fetchSubredditPosts(subreddit: string = "popular") {
   });
   if (!res.ok) throw new Error("Failed to fetch posts");
   const data = await res.json();
-  return data.data.children.map((child: RedditAPIResponse<RedditPost>) => child.data);
+  return data.data.children
+  .map((child: RedditAPIResponse<RedditPost>) => child.data);
 }
 
 export async function fetchPopularSubreddits() {
