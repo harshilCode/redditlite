@@ -48,7 +48,6 @@ export default function Sidebar() {
             return (
               <li key={sr.name}>
                 <Link
-                  prefetch
                   href={`${process.env.NEXT_PUBLIC_BASE_URL}${sr.url}`}
                   className={`block pl-12 p-3 transition-colors duration-200 tracking-wide font-inter rounded cursor-pointer ${isActive
                       ? "bg-gray-50 dark:bg-zinc-800 text-orange-500"
