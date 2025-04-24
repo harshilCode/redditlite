@@ -12,6 +12,7 @@ export async function fetchSubredditPosts(subreddit: string = "popular") {
     const res = await fetch(`${process.env.NEXT_PUBLIC_REDDIT_API_URL}/r/${subreddit}.json`);
     if (!res.ok) throw new Error("Failed to fetch posts");
     const data = await res.json();
+    console.log("Fetched posts:", data.data.children.length); // 👈 Debug
 
     return data.data.children.map((child: RedditAPIResponse<RedditPost>) => child.data);
   } catch (error) {

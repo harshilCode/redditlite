@@ -8,7 +8,7 @@ export default function Header() {
             <h1 className="text-2xl font-normal text-gray-800">redditlite</h1>
         </div>
       <div className="flex items-center gap-2">
-        <p className="text-sm text-gray-500">Harshil</p>
+        <p className="text-sm text-gray-500">By Harshil</p>
       </div>
     </header>
   );
