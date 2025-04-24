@@ -8,7 +8,7 @@ export async function fetchHomePosts() {
 }
 
 export async function fetchSubredditPosts(subreddit: string = "popular") {
-  const res = await fetch(`${process.env.REDDIT_API_URL}/r/${subreddit}.json`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_REDDIT_API_URL}/r/${subreddit}.json`, {
     headers: {
       "User-Agent": "Mozilla/5.0 (RedditClone/1.0)",
     },
@@ -22,7 +22,7 @@ export async function fetchSubredditPosts(subreddit: string = "popular") {
 
 export async function fetchPopularSubreddits() {
   try {
-    const res = await fetch(`${process.env.REDDIT_API_URL}/subreddits/popular.json`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_REDDIT_API_URL}/subreddits/popular.json`);
     if (!res.ok) throw new Error("Failed to fetch subreddits");
 
     const data = await res.json();
@@ -42,7 +42,7 @@ export async function fetchPopularSubreddits() {
 
 
 export async function fetchPostComments(postId: string) {
-  const res = await fetch(`${process.env.REDDIT_API_URL}/comments/${postId}.json`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_REDDIT_API_URL}/comments/${postId}.json`);
   const [postData, commentsData] = await res.json();
   return {
     post: postData?.data?.children?.[0]?.data ?? null,

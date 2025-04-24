@@ -1,13 +1,20 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { SubredditInfo } from "@/types/reddit";
 import { fetchPopularSubreddits } from "@/lib/reddit";
 
-export default async function Sidebar() {
+export default function Sidebar() {
   const pathname = usePathname();
-  const subreddits = await fetchPopularSubreddits();
+  const [subreddits, setSubreddits] = useState<SubredditInfo[]>([]);
+
+  useEffect(() => {
+    fetchPopularSubreddits()
+      .then(setSubreddits)
+      .catch((err) => console.error("Sidebar fetch failed:", err));
+  }, []);
 
   return (
     <aside className="bg-white dark:bg-zinc-900 border-r border-zinc-100 dark:border-zinc-700 sticky pt-4 top-0 h-screen overflow-y-none">
