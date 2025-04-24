@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import PostCard from "@/components/PostCard";
 import { fetchSubredditPosts } from "@/lib/reddit";
 import { RedditPost } from "@/types/reddit";
