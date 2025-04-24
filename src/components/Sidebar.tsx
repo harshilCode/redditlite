@@ -3,9 +3,11 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { SubredditInfo } from "@/types/reddit";
+import { fetchPopularSubreddits } from "@/lib/reddit";
 
-export default function Sidebar({ subreddits }: { subreddits: SubredditInfo[] }) {
+export default async function Sidebar() {
   const pathname = usePathname();
+  const subreddits = await fetchPopularSubreddits();
 
   return (
     <aside className="bg-white dark:bg-zinc-900 border-r border-zinc-100 dark:border-zinc-700 sticky pt-4 top-0 h-screen overflow-y-none">

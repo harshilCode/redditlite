@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ReactQueryProvider } from "./_providers/ReactQueryProvider";
-import { fetchPopularSubreddits } from "@/lib/reddit";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 
@@ -32,7 +31,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const subreddits = await fetchPopularSubreddits();
   return (
     <ReactQueryProvider>
       <html lang="en" className={inter.className}>
@@ -42,7 +40,7 @@ export default async function RootLayout({
           <Header />
           <div className="grid grid-cols-1 md:grid-cols-[250px_1fr] min-h-screen ">
             {/* Sidebar */}
-            <Sidebar subreddits={subreddits} />
+            <Sidebar />
             {/* Main Content */}
             <main className="p-4">{children}</main>
           </div>
