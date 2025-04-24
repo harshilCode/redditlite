@@ -8,7 +8,7 @@ export async function fetchHomePosts() {
 }
 
 export async function fetchSubredditPosts(subreddit: string = "popular") {
-  const res = await fetch(`${process.env.REDDIT_API_URL}/r/${subreddit}.json`, {
+  const res = await fetch(`https://www.reddit.com/r/${subreddit}.json`, {
     headers: {
       "User-Agent": "Mozilla/5.0 (RedditClone/1.0)",
     },
@@ -21,7 +21,7 @@ export async function fetchSubredditPosts(subreddit: string = "popular") {
 }
 
 export async function fetchPopularSubreddits() {
-  const res = await fetch(`${process.env.REDDIT_API_URL}/subreddits/popular.json`);
+  const res = await fetch(`https://www.reddit.com/subreddits/popular.json`);
   if (!res.ok) throw new Error("Failed to fetch subreddits");
   const data = await res.json();
 
