@@ -21,9 +21,3 @@ export function timeAgoFromUtc(unixUtc: number): string {
   
     return "a while ago";
   }
-  
-
-  export function getImageFromTitle(title: string): string {
-    const hash = Array.from(title).reduce((acc, char) => acc + char.charCodeAt(0), 0);
-    return `https://picsum.photos/640/360?random=${hash}`;
-  }
