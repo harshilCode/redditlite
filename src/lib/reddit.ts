@@ -9,18 +9,26 @@ export async function fetchHomePosts() {
 
 export async function fetchSubredditPosts(subreddit: string = "popular") {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/proxy/reddit?url=https://www.reddit.com/r/${subreddit}.json`);
-    console.log("Response:", res); // 👈 Debug
+    const baseUrl = `${process.env.NEXT_PUBLIC_REDDIT_API_URL}/r/${subreddit}.json`;
+    
+    const url = new URL(baseUrl);
+    url.searchParams.set("client_id", process.env.REDDIT_CLIENT_ID!);
+
+    const res = await fetch(url.toString());
+
+    console.log("Response:", res);
     if (!res.ok) throw new Error("Failed to fetch posts");
+
     const data = await res.json();
-    console.log("Fetched posts:", data.data.children.length); // 👈 Debug
+    console.log("Fetched posts:", data.data.children.length);
 
     return data.data.children.map((child: RedditAPIResponse<RedditPost>) => child.data);
   } catch (error) {
     console.error("fetchSubredditPosts failed:", error);
-    return []; // 👈 return fallback
+    return [];
   }
 }
+
 
 export async function fetchPopularSubreddits() {
   try {
