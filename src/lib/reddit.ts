@@ -1,4 +1,5 @@
 import { RedditPost, RedditAPIResponse, SubredditInfo } from "@/types/reddit";
+import { fetchRedditData } from "./redditOAuth";
 
 export async function fetchHomePosts() {
   const res = await fetch(`https://oauth.reddit.com/.json`);
@@ -7,29 +8,38 @@ export async function fetchHomePosts() {
   return data.data.children.map((child: RedditAPIResponse<RedditPost>) => child.data);
 }
 
+// export async function fetchSubredditPosts(subreddit: string = "popular") {
+//   try {
+//     const baseUrl = `${process.env.NEXT_PUBLIC_REDDIT_OAUTH_API_URL}/r/${subreddit}.json`;
+    
+//     const url = new URL(baseUrl);
+//     url.searchParams.set("client_id", process.env.REDDIT_CLIENT_ID!);
+//     url.searchParams.set("response_type", 'code');
+
+//     const res = await fetch(url.toString());
+
+//     console.log("Response:", res);
+//     if (!res.ok) throw new Error("Failed to fetch posts");
+
+//     const data = await res.json();
+//     console.log("Fetched posts:", data.data.children.length);
+
+//     return data.data.children.map((child: RedditAPIResponse<RedditPost>) => child.data);
+//   } catch (error) {
+//     console.error("fetchSubredditPosts failed:", error);
+//     return [];
+//   }
+// }
+
 export async function fetchSubredditPosts(subreddit: string = "popular") {
   try {
-    const baseUrl = `${process.env.NEXT_PUBLIC_REDDIT_OAUTH_API_URL}/r/${subreddit}.json`;
-    
-    const url = new URL(baseUrl);
-    url.searchParams.set("client_id", process.env.REDDIT_CLIENT_ID!);
-    url.searchParams.set("response_type", 'code');
-
-    const res = await fetch(url.toString());
-
-    console.log("Response:", res);
-    if (!res.ok) throw new Error("Failed to fetch posts");
-
-    const data = await res.json();
-    console.log("Fetched posts:", data.data.children.length);
-
-    return data.data.children.map((child: RedditAPIResponse<RedditPost>) => child.data);
+    const data = await fetchRedditData(`/r/${subreddit}.json`);
+    return data.data.children.map((child: any) => child.data);
   } catch (error) {
     console.error("fetchSubredditPosts failed:", error);
     return [];
   }
 }
-
 
 export async function fetchPopularSubreddits() {
   try {
