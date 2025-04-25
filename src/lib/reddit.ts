@@ -9,10 +9,11 @@ export async function fetchHomePosts() {
 
 export async function fetchSubredditPosts(subreddit: string = "popular") {
   try {
-    const baseUrl = `${process.env.NEXT_PUBLIC_REDDIT_API_URL}/r/${subreddit}.json`;
+    const baseUrl = `${process.env.NEXT_PUBLIC_REDDIT_OAUTH_API_URL}/r/${subreddit}.json`;
     
     const url = new URL(baseUrl);
     url.searchParams.set("client_id", process.env.REDDIT_CLIENT_ID!);
+    url.searchParams.set("response_type", 'code');
 
     const res = await fetch(url.toString());
 
