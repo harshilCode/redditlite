@@ -34,7 +34,7 @@ export async function fetchHomePosts() {
 export async function fetchSubredditPosts(subreddit: string = "popular") {
   try {
     const data = await fetchRedditData(`/r/${subreddit}.json`);
-    return data.data.children.map((child: any) => child.data);
+    return data.data.children.map((child: RedditAPIResponse<RedditPost>) => child.data);
   } catch (error) {
     console.error("fetchSubredditPosts failed:", error);
     return [];
