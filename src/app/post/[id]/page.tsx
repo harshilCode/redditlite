@@ -4,8 +4,8 @@ export const dynamic = "force-dynamic";
 import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import { fetchPostComments } from "@/lib/reddit";
-import { RedditComment, RedditCommentAPIResponse, RedditPost } from "@/types/reddit";
+import { fetchPostComments } from "@/lib/reddit.client";
+import { RedditComment, RedditCommentAPIResponse } from "@/types/reddit";
 
 export default function PostPage() {
   const { id } = useParams();
@@ -20,11 +20,12 @@ export default function PostPage() {
   if (isLoading) return <p className="p-6">Loading post...</p>;
   if (isError || !data?.post) return <p className="p-6 text-red-500">Error loading post.</p>;
 
-  const { post, comments }: { post: RedditPost, comments: RedditCommentAPIResponse<RedditComment>[] } = data;
+  const post = data.post;
+  const comments = data.comments;
 
   return (
     <div className="p-6 max-w-2xl mx-auto space-y-4">
-      <Link href={`${process.env.NEXT_PUBLIC_BASE_URL}/r/${post.subreddit}`}> r/{post.subreddit}</Link>
+      <Link href={`/r/${post.subreddit}`}> r/{post.subreddit}</Link>
       <h1 className="text-xl font-semibold">{post.title}</h1>
       <p className="text-sm text-zinc-600">Posted by u/{post.author}</p>
       <hr />

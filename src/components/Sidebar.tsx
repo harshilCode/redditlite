@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { SubredditInfo } from "@/types/reddit";
-import { fetchPopularSubreddits } from "@/lib/reddit";
+import { fetchPopularSubreddits } from "@/lib/reddit.client";
 import { Cpu, Flame } from "lucide-react";
 
 export default function Sidebar({ isOpen }: { isOpen: boolean }) {
@@ -23,7 +23,7 @@ export default function Sidebar({ isOpen }: { isOpen: boolean }) {
       } h-screen overflow-y-auto w-[250px] z-40`}>
       <ul className="text-sm m-4">
         <li>
-          <Link prefetch={true} href={`${process.env.NEXT_PUBLIC_BASE_URL}/r/popular`} className={`flex items-center gap-2 block p-3 transition-colors duration-200 tracking-wide font-inter rounded-xl cursor-pointer ${pathname === "/" || pathname === "/r/popular"
+          <Link prefetch={true} href="/r/popular" className={`flex items-center gap-2 block p-3 transition-colors duration-200 tracking-wide font-inter rounded-xl cursor-pointer ${pathname === "/" || pathname === "/r/popular"
               ? "bg-orange-50 dark:bg-zinc-800 text-orange-700"
               : "text-gray-600 dark:text-gray-200 hover:text-orange-700 hover:bg-orange-50 dark:hover:bg-zinc-800"
             }`}>
@@ -32,7 +32,7 @@ export default function Sidebar({ isOpen }: { isOpen: boolean }) {
           </Link>
         </li>
         <li>
-          <Link prefetch={true} href={`${process.env.NEXT_PUBLIC_BASE_URL}/r/technology`} className={`flex items-center gap-2 block p-3 transition-colors duration-200 tracking-wide font-inter rounded-xl cursor-pointer ${pathname === "/r/technology"
+          <Link prefetch={true} href="/r/technology" className={`flex items-center gap-2 block p-3 transition-colors duration-200 tracking-wide font-inter rounded-xl cursor-pointer ${pathname === "/r/technology"
             ? "bg-orange-50 dark:bg-zinc-800 text-orange-700"
             : "text-gray-600 dark:text-gray-200 hover:text-orange-700 hover:bg-orange-50 dark:hover:bg-zinc-800"
             }`}>
@@ -53,7 +53,7 @@ export default function Sidebar({ isOpen }: { isOpen: boolean }) {
               <li key={sr.name}>
                 <Link
                   prefetch={true}
-                  href={`${process.env.NEXT_PUBLIC_BASE_URL}${sr.url}`}
+                  href={sr.url}
                   className={`flex items-center gap-2 block p-3 transition-colors duration-200 tracking-wide font-inter rounded-xl cursor-pointer ${isActive
                     ? "text-orange-700 bg-orange-50 dark:bg-zinc-800 text-orange-500 dark:text-orange-500"
                     : "text-gray-600 dark:text-gray-200 hover:text-orange-500 hover:bg-gray-50 dark:hover:bg-zinc-800"

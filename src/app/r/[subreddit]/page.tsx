@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import PostCard from "@/components/PostCard";
-import { fetchSubredditPosts } from "@/lib/reddit";
+import { fetchSubredditPosts } from "@/lib/reddit.server";
 import { RedditPost } from "@/types/reddit";
 type Props = {
   params: Promise<{ subreddit: string }>;

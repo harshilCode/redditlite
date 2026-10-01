@@ -19,7 +19,7 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
       </div>
       <div className="flex items-center w-40 border-l border-gray-100 dark:border-gray-700 h-full justify-center">
         <p className="text-muted-foreground text-xs">By</p>
-        <Link href="https://github.com/harshil1793" target="_blank" className="text-xs px-2 font-mono text-muted-foreground hover:underline hover:text-foreground">Harshil</Link>
+        <Link href="https://github.com/harshilmoradia" target="_blank" className="text-xs px-2 font-mono text-muted-foreground hover:underline hover:text-foreground">Harshil</Link>
       </div>
     </header>
   );
