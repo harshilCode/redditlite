@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next"
 import "./globals.css";
 import { ReactQueryProvider } from "./_providers/ReactQueryProvider";
 import SiteShell from "@/components/SiteShell";
@@ -31,6 +32,7 @@ export default async function RootLayout({
           className={`${geistSans.variable} ${geistMono.variable} antialiased bg-accent`}
         >
           <SiteShell>{children}</SiteShell>
+          <Analytics />
         </body>
       </html>
     </ReactQueryProvider>
